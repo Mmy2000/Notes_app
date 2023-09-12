@@ -1,3 +1,7 @@
 from django.shortcuts import render
 
-# Create your views here.
+def all_notes(request):
+    pass
+
+def detail(request):
+    pass
