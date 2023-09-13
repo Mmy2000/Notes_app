@@ -9,14 +9,14 @@ def all_notes(request):
     context = {
         'all_notes' : all_notes
     }
-    return render(request , 'all_notes.html' , context)
+    return render(request , 'notes.html' , context)
 
 def detail(request, slug):
     note = Note.objects.get(slug=slug)
     context = {
         'note':note
     }
-    return render(request , 'note_detail.html' , context)
+    return render(request , 'notes_details.html' , context)
 
 def note_add(request):
     if request.method == "POST" :

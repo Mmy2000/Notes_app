@@ -11,6 +11,7 @@ class Note(models.Model):
     craeted = models.DateTimeField( default=datetime.datetime.now , blank=True)
     active = models.BooleanField(default=True)
     tags = models.CharField(blank=True, max_length=50)
+    img = models.ImageField(upload_to="notes-img")
 
 
 

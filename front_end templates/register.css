@@ -1,0 +1,93 @@
+body {
+    background: url(signup_image.jpg);
+}
+
+form {
+    bottom: 60px;
+    position: absolute;
+    left: 500px;
+    background-color: rgba(255, 255, 255, 0);
+    height: 550px;
+    width: 400px;
+    overflow: hidden;
+    border-radius: 20px;
+    margin: 20px;
+    transition: 0.7s ease;
+}
+
+form:hover {
+    transform: scale(1.1);
+    background-color: rgb(0, 0, 0, 0.7);
+}
+
+h1 {
+    color: white;
+    text-align: center;
+}
+
+input[value="SIGN UP"] {
+    position: absolute;
+    top: 460px;
+    left: 50px;
+    width: 300px;
+    height: 35px;
+    background: #0094ff;
+    border: none;
+    outline: none;
+    font-size: 20px;
+    color: white;
+    cursor: pointer;
+    transition: 0.7s ease;
+}
+
+input[value="SIGN UP"]:hover {
+    background: rgb(0, 0, 0);
+    color: #0094ff;
+    transform: scale(1.1);
+}
+
+::placeholder {
+    color: white;
+}
+
+.fname {
+    padding-left: 50px;
+}
+
+.lname {
+    padding-left: 50px;
+}
+
+.email {
+    padding-left: 50px;
+}
+
+.password {
+    padding-left: 50px;
+}
+
+.wiyg {
+    color: white;
+    font-size: larger;
+    padding-top: 20px;
+    padding-left: 30px;
+}
+
+.io {
+    color: white;
+    font-size: large;
+    padding-left: 40px;
+}
+
+input[type="text"],
+[type="password"] {
+    position: absolute;
+    outline: none;
+    border: none;
+    width: 250px;
+    height: 15px;
+    border-bottom: 2px solid #0094ff;
+    background: none;
+    color: white;
+    padding-left: 20px;
+}
