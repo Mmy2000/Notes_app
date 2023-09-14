@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load bootstrap4 %}
+{% load django_bootstrap5 %}
 {% block body %}
 
 
@@ -11,9 +11,7 @@
             <form method="POST">
                 {% csrf_token %}
                 {% bootstrap_form form %}
-                {% buttons %}
-                <button type="submit" class="btn btn-primary">Submit</button>
-                {% endbuttons %}
+                {% bootstrap_button button_type="submit" content="Submit" %}
             </form>
         </div>
     </div>

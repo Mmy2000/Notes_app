@@ -12,7 +12,7 @@ from django.db.models import Count
 
 class PostList(ListView):
     model = Note
-    paginate_by = 2
+    paginate_by = 4
     template_name = 'notes.html'
 
     def get_queryset(self) :
@@ -52,7 +52,7 @@ def note_add(request):
 
     else:
         form = NoteForm
-        context = {
+    context = {
         'form' : form ,
     }
     

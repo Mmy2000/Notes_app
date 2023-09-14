@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load bootstrap4 %}
+{% load django_bootstrap5 %}
 {% block body %}
 <div class="container">
     <div class="add_form">
@@ -10,9 +10,7 @@
                 {% csrf_token %}
                 {% bootstrap_form user_form %}
                 {% bootstrap_form profile_form %}
-                {% buttons %}
-                <button type="submit" class="btn btn-primary">Edit Profile</button>
-                {% endbuttons %}
+                {% bootstrap_button button_type="submit" content="Edit Profile" %}
             </form>
 
         </div>
