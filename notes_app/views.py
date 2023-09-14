@@ -12,6 +12,7 @@ from django.db.models import Count
 
 class PostList(ListView):
     model = Note
+    paginate_by = 2
     template_name = 'notes.html'
 
     def get_queryset(self) :
@@ -35,7 +36,9 @@ class PostDetail(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["categories"] = Category.objects.all().annotate(post_count=Count('post_category'))
+        context["recent_posts"] = Note.objects.all()[:3]
         return context
+
 
 def note_add(request):
     if request.method == "POST" :
@@ -49,12 +52,10 @@ def note_add(request):
 
     else:
         form = NoteForm
-    context = {
-        'form' : form
+        context = {
+        'form' : form ,
     }
     
-
-
     return render(request, 'add.html' , context)
 
 def edit(request , slug):

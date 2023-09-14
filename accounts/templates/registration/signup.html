@@ -5,14 +5,17 @@
 
 <div class="container">
     <div class="col-md-6 mx-auto mt-5">
-        <h2 style="text-align:center;">Signup</h2>
-        <form method="POST">
-            {% csrf_token %}
-            {% bootstrap_form form %}
-            {% buttons %}
-            <button type="submit" class="btn btn-primary">Submit</button>
-            {% endbuttons %}
-        </form>
+        <div class="add_form">
+
+            <h2 style="text-align:center;">Signup</h2>
+            <form method="POST">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                {% buttons %}
+                <button type="submit" class="btn btn-primary">Submit</button>
+                {% endbuttons %}
+            </form>
+        </div>
     </div>
 </div>
 {% endblock body %}
