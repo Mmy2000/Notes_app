@@ -1,6 +1,13 @@
 {% extends "base.html" %}
 {% load static %}
+{% load django_bootstrap5 %}
 {% block body %}
+<style>
+  .button_style {
+    text-align: center;
+    padding-top: 100px;
+  }
+</style>
 
 <section id="hero-animated" class="hero-animated d-flex align-items-center">
   <div class="container d-flex flex-column justify-content-center align-items-center text-center position-relative"
@@ -9,7 +16,7 @@
     <h2>Welcome to <span>Quick Notes App</span></h2>
     <p>Create Awesome Note .. Everywhere.</p>
     <div class="d-flex">
-      <a href="#about" class="btn-get-started scrollto">Get Started</a>
+      <a href="{% url 'notes_app:add_note' %}" class="btn-get-started scrollto">Get Started</a>
     </div>
   </div>
 </section>
@@ -41,6 +48,11 @@
               <span class="post-author"> / {{note.user.username}}</span>
             </div>
             <h3 class="post-title">{{note.title}}</p>
+              <div class="content">
+                <p>
+                  {{note.content|truncatewords:'20'}}
+                </p>
+              </div>
               <a href="{{note.get_absolute_url}}" class="readmore stretched-link"><span>Read More</span><i
                   class="bi bi-arrow-right"></i></a>
           </div>
@@ -51,6 +63,12 @@
       </div>
 
     </div>
+    <div class="container">
+      <div class="button_style">
+        <a href="{% url 'notes_app:post_list' %}"> {% bootstrap_button button_type="submit" content="See More" %}</a>
+      </div>
+    </div>
+
 
   </section><!-- End Recent Blog Posts Section -->
 

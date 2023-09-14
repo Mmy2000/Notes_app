@@ -36,27 +36,31 @@ class PostDetail(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["categories"] = Category.objects.all().annotate(post_count=Count('post_category'))
-        context["recent_posts"] = Note.objects.all()[:3]
+        context["recent_posts"] = Note.objects.all().order_by('-craeted')[:3]
         return context
 
 
 def note_add(request):
-    if request.method == "POST" :
-        form = NoteForm(request.POST)
+    try :
+        if request.method == "POST" :
+            form = NoteForm(request.POST)
 
-        if form.is_valid():
-            new_form = form.save(commit=False)
-            new_form.user = request.user
-            new_form.save()
-            return redirect('/notes')
+            if form.is_valid():
+                new_form = form.save(commit=False)
+                new_form.user = request.user
+                new_form.save()
+                return redirect('/notes')
 
-    else:
-        form = NoteForm
-    context = {
-        'form' : form ,
-    }
-    
-    return render(request, 'add.html' , context)
+        else:
+            form = NoteForm
+        context = {
+            'form' : form ,
+        }
+        
+        return render(request, 'add.html' , context)
+    except :
+        return redirect('/accounts/login')
+
 
 def edit(request , slug):
     note = get_object_or_404(Note , slug=slug)
