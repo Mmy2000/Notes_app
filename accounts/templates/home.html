@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load static %}
+{% block body %}
+
+<section id="hero-animated" class="hero-animated d-flex align-items-center">
+  <div class="container d-flex flex-column justify-content-center align-items-center text-center position-relative"
+    data-aos="zoom-out">
+    <img src="{% static 'assets/img/hero-carousel/hero-carousel-3.svg' %}" class="img-fluid animated">
+    <h2>Welcome to <span>Quick Notes App</span></h2>
+    <p>Create Awesome Note .. Everywhere.</p>
+    <div class="d-flex">
+      <a href="#about" class="btn-get-started scrollto">Get Started</a>
+    </div>
+  </div>
+</section>
+
+<main id="main">
+  <!-- ======= Recent Blog Posts Section ======= -->
+  <section id="recent-blog-posts" class="recent-blog-posts">
+
+    <div class="container" data-aos="fade-up">
+
+      <div class="section-header">
+        <h2>Notes</h2>
+        <p>Recent notes form our Notes</p>
+      </div>
+
+      <div class="row">
+        {% for note in recent_notes %}
+
+        <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+          <div class="post-box">
+            {% if note.img %}
+            <div class="post-img">
+              <img src="{{note.img.url}}" alt="" class="img-fluid">
+            </div>
+            {% else %}
+            <h2>No Image Uploaded Yet</h2>
+            {% endif %} <div class="meta">
+              <span class="post-date">{{note.craeted}}</span>
+              <span class="post-author"> / {{note.user.username}}</span>
+            </div>
+            <h3 class="post-title">{{note.title}}</p>
+              <a href="blog-details.html" class="readmore stretched-link"><span>Read More</span><i
+                  class="bi bi-arrow-right"></i></a>
+          </div>
+        </div>
+
+        {%endfor%}
+
+      </div>
+
+    </div>
+
+  </section><!-- End Recent Blog Posts Section -->
+
+
+</main><!-- End #main -->
+
+{% endblock body %}

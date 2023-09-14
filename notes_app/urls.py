@@ -4,10 +4,9 @@ from . import views
 app_name = 'notes_app'
 
 urlpatterns = [
-    url(r'^$' ,views.all_notes , name='all_notes'),
-    #url(r'^(?P<id>\d+)$' , views.detail,name='note_detail'),
-    url(r'^(?P<slug>[-\w]+)/$' , views.detail,name='note_detail'),
+    path('' , views.PostList.as_view() , name='post_list'),
+    path('<slug:slug>' , views.PostDetail.as_view() , name='post_detail'),
     url(r'^add$' ,views.note_add , name='add_note'),
     url(r'^(?P<slug>[-\w]+)/edit$' , views.edit,name='note_edit'),
-
+    path('category/<str:slug>' , views.PostByCategory.as_view() , name='post_by_category'),
 ]

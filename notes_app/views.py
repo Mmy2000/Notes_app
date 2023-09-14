@@ -1,22 +1,41 @@
 from django.shortcuts import get_object_or_404, render , redirect
 from django.contrib.auth.models import User
 from django.http import HttpResponse
-from .models import Note
+from .models import Note , Category
 from .forms import NoteForm
+from django.views.generic import ListView ,DetailView
+from django.db.models.query_utils import Q
+from django.db.models import Count
 
-def all_notes(request):
-    all_notes = Note.objects.all()
-    context = {
-        'all_notes' : all_notes
-    }
-    return render(request , 'notes.html' , context)
 
-def detail(request, slug):
-    note = Note.objects.get(slug=slug)
-    context = {
-        'note':note
-    }
-    return render(request , 'notes_details.html' , context)
+
+
+class PostList(ListView):
+    model = Note
+    template_name = 'notes.html'
+
+    def get_queryset(self) :
+        name = self.request.GET.get('q','')
+        object_list = Note.objects.filter(
+            Q(title__icontains = name) |
+            Q(content__icontains = name)
+        )
+        return object_list
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["categories"] = Category.objects.all().annotate(post_count=Count('post_category'))
+        return context
+
+class PostDetail(DetailView):
+    model = Note
+    template_name = 'notes_details.html'
+
+
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["categories"] = Category.objects.all().annotate(post_count=Count('post_category'))
+        return context
 
 def note_add(request):
     if request.method == "POST" :
@@ -58,3 +77,16 @@ def edit(request , slug):
 
 
     return render(request, 'create.html' , context)
+
+
+class PostByCategory(ListView):
+    model = Note
+    template_name = 'notes.html'    
+
+    def get_queryset(self) :
+        slug = self.kwargs['slug']
+        object_list = Note.objects.filter(
+            Q(category__name__icontains = slug)
+        )
+        return object_list
+    
