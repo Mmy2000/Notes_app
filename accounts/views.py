@@ -37,9 +37,9 @@ def signup(request):
 
 
 def profile(request):
-    profile=Profile.objects.get(user=request.user)
+    profile = get_object_or_404(Profile,user=request.user)
 
-    return render(request,'profile/profile.html',{'profile':profile})
+    return render(request,'profile/users-profile.html',{'profile':profile})
 
 
 def edit_profile(requset):
