@@ -4,12 +4,19 @@ from .models import Profile
 from notes_app.models import Note
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate , login 
+from django.contrib import messages
+from django.views.generic import TemplateView
+
+
+
 
 def home(request):
     recent_notes = Note.objects.all()[:3]
+    user = request.user
 
     return render(request, 'home.html',{
         'recent_notes' : recent_notes,
+        'user' : user
     })
 
 
@@ -53,6 +60,7 @@ def edit_profile(requset):
             myprofile = profile_form.save(commit=False)
             myprofile.user = requset.user
             myprofile.save()
+            messages.success(requset, "Profile Is Updated Succssefully.")
             return redirect('/accounts/profile')
     else:
         user_form = UserForm(instance=requset.user)

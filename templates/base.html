@@ -41,7 +41,11 @@
     <link href="{% static 'assets/css/main.css'%}" rel="stylesheet">
     <link href="{% static 'assets/css/my_style.css'%}" rel="stylesheet">
 
-
+    <style>
+        .messages {
+            margin-top: 85px;
+        }
+    </style>
     <!-- =======================================================
   * Template Name: HeroBiz
   * Updated: Jul 27 2023 with Bootstrap v5.3.1
@@ -69,8 +73,8 @@
                     <li><a class="nav-link scrollto" href="/">Home</a></li>
                     <li><a class="nav-link scrollto" href="{% url 'notes_app:post_list' %}">Notes</a></li>
                     {% if request.user.is_authenticated %}
-                        <li><a class="nav-link scrollto" href="{% url 'accounts:profile' %}">Profile</a></li>
-                        <li><a class="nav-link scrollto" href="{% url 'logout' %}">Logout</a></li>
+                    <li><a class="nav-link scrollto" href="{% url 'accounts:profile' %}">Profile</a></li>
+                    <li><a class="nav-link scrollto" href="{% url 'logout' %}">Logout</a></li>
                     {% else %}
                     <li><a class="nav-link scrollto" href="{% url 'login' %}">Login</a></li>
                     <li><a class="nav-link scrollto" href="{% url 'accounts:signup' %}">Sign Up</a></li>
@@ -84,8 +88,22 @@
         </div>
     </header><!-- End Header -->
 
-  {% block body %}
-  {% endblock body %}
+
+
+    {% if messages %}
+    <div class="messages">
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {% for message in messages %}
+            <strong>success!</strong> {{ message }}
+            {% endfor %}
+
+        </div>
+    </div>
+    {% endif %}
+    {% block body %}
+
+
+    {% endblock body %}
 
     <!-- ======= Footer ======= -->
     <footer id="footer" class="footer">

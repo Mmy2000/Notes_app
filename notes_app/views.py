@@ -6,6 +6,8 @@ from .forms import NoteForm
 from django.views.generic import ListView ,DetailView
 from django.db.models.query_utils import Q
 from django.db.models import Count
+from django.contrib import messages
+
 
 
 
@@ -16,10 +18,10 @@ class PostList(ListView):
     template_name = 'notes.html'
 
     def get_queryset(self) :
+        user = self.request.user
         name = self.request.GET.get('q','')
         object_list = Note.objects.filter(
-            Q(title__icontains = name) |
-            Q(content__icontains = name)
+            user = user 
         )
         return object_list
     def get_context_data(self, **kwargs):
@@ -49,6 +51,7 @@ def note_add(request):
                 new_form = form.save(commit=False)
                 new_form.user = request.user
                 new_form.save()
+                messages.success(request, "Note Is Added Succssefully.")
                 return redirect('/notes')
 
         else:
@@ -71,6 +74,7 @@ def edit(request , slug):
             new_form = form.save(commit=False)
             new_form.user = request.user
             new_form.save()
+            messages.success(request, "Note Is Updated Succssefully.")
             return redirect('/notes')
 
     else:

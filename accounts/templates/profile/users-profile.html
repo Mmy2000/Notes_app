@@ -16,7 +16,9 @@
 
   <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet">
 
   <!-- Vendor CSS Files -->
   <link href="{% static 'assets/vendor 2/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
@@ -29,7 +31,11 @@
 
   <!-- Template Main CSS File -->
   <link href="{% static 'assets/css 2/style.css' %}" rel="stylesheet">
-
+  <style>
+    .messages {
+      margin-top: 85px;
+    }
+  </style>
   <!-- =======================================================
   * Template Name: NiceAdmin
   * Updated: Aug 30 2023 with Bootstrap v5.3.1
@@ -62,13 +68,26 @@
           </a>
         </li><!-- End Search Icon-->
 
+        {% if messages %}
+        <div class="messages">
+          <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {% for message in messages %}
+            <strong>success!</strong> {{ message }}
+            {% endfor %}
 
+          </div>
+        </div>
+        {% endif %}
 
 
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+            {% if note.img %}
             <img src="{{profile.image.url}}" alt="Profile" class="rounded-circle">
+            {% else %}
+            <h2>No Image Uploaded Yet</h2>
+            {% endif %}
             <span class="d-none d-md-block dropdown-toggle ps-2">{{profile.user.username}}</span>
           </a><!-- End Profile Iamge Icon -->
 
@@ -148,6 +167,18 @@
           <span>Register</span>
         </a>
       </li><!-- End Register Page Nav -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{% url 'notes_app:add_note' %}">
+          <i class="bi bi-card-list"></i>
+          <span>Add Note</span>
+        </a>
+      </li><!-- End Register Page Nav -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{% url 'notes_app:post_list' %}">
+          <i class="bi bi-card-list"></i>
+          <span>My Notes</span>
+        </a>
+      </li><!-- End Register Page Nav -->
 
     </ul>
 
@@ -171,8 +202,11 @@
 
           <div class="card">
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
-
+              {% if note.img %}
               <img src="{{profile.image.url}}" alt="Profile" class="rounded-circle">
+              {% else %}
+              <h2>No Image Uploaded Yet</h2>
+              {% endif %}
               <h2>{{profile.user.username}}</h2>
               <h3>{{profile.headline}}</h3>
               <div class="social-links mt-2">
@@ -198,11 +232,11 @@
                 </li>
 
                 <li class="nav-item">
-                  <a href="{% url 'accounts:edit_profile' %}"><button class="nav-link"  >Edit Profile</button></a>
+                  <a href="{% url 'accounts:edit_profile' %}"><button class="nav-link">Edit Profile</button></a>
                 </li>
 
                 <li class="nav-item">
-                  <a href="{% url 'password_change'%}"><button class="nav-link" >Change Password</button></a>
+                  <a href="{% url 'password_change'%}"><button class="nav-link">Change Password</button></a>
                 </li>
 
               </ul>
@@ -247,7 +281,9 @@
                 </div>
 
 
-              </div><!-- End Bordered Tabs -->
+              </div>
+
+              <!-- End Bordered Tabs -->
 
             </div>
           </div>
@@ -272,7 +308,8 @@
     </div>
   </footer><!-- End Footer -->
 
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
   <script src="{% static 'assets/vendor 2/apexcharts/apexcharts.min.js' %}"></script>
