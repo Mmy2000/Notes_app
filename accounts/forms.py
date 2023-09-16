@@ -17,6 +17,7 @@ class UserForm(forms.ModelForm):
         fields = ['username','email','first_name','last_name']
     
 class ProfileForm(forms.ModelForm):
+    image = forms.ImageField(  required = True)
     class Meta:
         model = Profile
-        fields = ['phone_number','address','image','bio' , 'phone_number']
+        fields = ['phone_number','address','image','bio','phone_number','fb_link' ,'twitter_link' , 'instagram_link' , 'linked_in_link']

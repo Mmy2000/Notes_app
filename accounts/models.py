@@ -13,15 +13,12 @@ class Profile(models.Model):
     headline = models.CharField(max_length=50 , blank=True, null=True)
     address = models.CharField(max_length=50, blank=True, null=True)
     bio = models.TextField(blank=True, null=True)
-    image = models.ImageField(upload_to='users/')
+    image = models.ImageField(upload_to='users/', null=True, blank=True )
     join_date = models.DateTimeField( default=datetime.datetime.now())
     fb_link = models.URLField( max_length=200, blank=True, null=True)
     twitter_link = models.URLField( max_length=200, blank=True, null=True)
     instagram_link = models.URLField( max_length=200, blank=True, null=True)
     linked_in_link = models.URLField( max_length=200, blank=True, null=True)
-
-
-
 
 
 

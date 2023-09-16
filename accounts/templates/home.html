@@ -3,7 +3,7 @@
 {% load django_bootstrap5 %}
 {% block body %}
 <style>
-  .button_style {
+  .button_styles {
     text-align: center;
     padding-top: 100px;
   }
@@ -29,7 +29,7 @@
 
       <div class="section-header">
         <h2>Notes</h2>
-        <p>Recent notes form our Notes</p>
+        <p>Recent notes</p>
       </div>
 
       <div class="row">
@@ -63,12 +63,12 @@
       </div>
 
     </div>
-    <div class="container">
-      <div class="button_style">
+      {% if request.user.is_authenticated %}
+      <div class="button_styles">
         <a href="{% url 'notes_app:post_list' %}"> {% bootstrap_button button_type="submit" content="See More" %}</a>
       </div>
-    </div>
-
+      {% else %}
+      {% endif %}
 
   </section><!-- End Recent Blog Posts Section -->
 

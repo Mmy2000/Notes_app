@@ -11,12 +11,10 @@ from django.views.generic import TemplateView
 
 
 def home(request):
-    recent_notes = Note.objects.all()[:3]
-    user = request.user
+    recent_notes = Note.objects.filter().order_by('-craeted')[:3]
 
     return render(request, 'home.html',{
         'recent_notes' : recent_notes,
-        'user' : user
     })
 
 
@@ -31,9 +29,9 @@ def signup(request):
                 user = authenticate(username=usernames,password=passwords)
                 login(request,user)
 
-                return redirect('/accounts/profile')
+                return redirect('/accounts/login')
             except:
-                return redirect('/accounts/profile')
+                return redirect('/accounts/login')
 
             
     else:
@@ -43,8 +41,8 @@ def signup(request):
 
 
 
-def profile(request):
-    profile = get_object_or_404(Profile,user=request.user)
+def profile(request ):
+    profile = Profile.objects.get(user=request.user)
 
     return render(request,'profile/users-profile.html',{'profile':profile})
 
@@ -53,7 +51,7 @@ def edit_profile(requset):
     profile = Profile.objects.get(user=requset.user)
     if requset.method == "POST":
         user_form = UserForm(requset.POST , instance=requset.user)
-        profile_form = ProfileForm(requset.POST,instance=profile)
+        profile_form = ProfileForm(requset.POST,requset.FILES,instance=profile)
 
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
@@ -61,7 +59,7 @@ def edit_profile(requset):
             myprofile.user = requset.user
             myprofile.save()
             messages.success(requset, "Profile Is Updated Succssefully.")
-            return redirect('/accounts/profile')
+            return redirect('/')
     else:
         user_form = UserForm(instance=requset.user)
         profile_form = ProfileForm(instance=profile)

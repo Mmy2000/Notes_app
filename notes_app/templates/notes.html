@@ -1,9 +1,13 @@
 {% extends "base.html" %}
 {% load static %}
+{% load django_bootstrap5 %}
 {% block body %}
-
-
-
+<style>
+  .button_styles {
+    text-align: center;
+    padding-top: 10px;
+  }
+</style>
 
 <main id="main">
 
@@ -67,6 +71,10 @@
               </article>
             </div><!-- End post list item -->
             {% endfor %}
+            <div class="button_styles">
+              <a href="{% url 'notes:add_note' %}">
+                {% bootstrap_button button_type="submit" content="Add Note" %}</a>
+            </div>
 
           </div><!-- End blog posts list -->
 
@@ -118,13 +126,13 @@
             </div><!-- End sidebar categories-->
 
 
-            </div><!-- End sidebar recent posts-->
+          </div><!-- End sidebar recent posts-->
 
-          </div><!-- End Blog Sidebar -->
-
-        </div>
+        </div><!-- End Blog Sidebar -->
 
       </div>
+
+    </div>
 
     </div>
   </section><!-- End Blog Section -->
