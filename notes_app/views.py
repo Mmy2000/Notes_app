@@ -12,6 +12,7 @@ from django.contrib import messages
 
 
 
+
 class PostList(ListView):
     model = Note
     paginate_by = 4
@@ -86,6 +87,18 @@ def edit(request , slug):
 
 
     return render(request, 'create.html' , context)
+
+def delete_note(request , slug):
+    note = get_object_or_404(Note , slug=slug)
+    context = {'post': note}    
+    
+    if request.method == 'GET':
+        return render(request, 'post_confirm_delete.html',context)
+    elif request.method == 'POST':
+        note.delete()
+        messages.success(request,  'The post has been deleted successfully.')
+        return redirect('/notes')
+
 
 
 class PostByCategory(ListView):

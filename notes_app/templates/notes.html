@@ -7,6 +7,10 @@
     text-align: center;
     padding-top: 10px;
   }
+
+  .button_styles2 {
+    padding-bottom: 5px;
+  }
 </style>
 
 <main id="main">
@@ -43,7 +47,8 @@
                   <img src="{{note.img.url}}" alt="" class="img-fluid">
                 </div>
                 {% else %}
-                <h2>No Image Uploaded Yet</h2>
+                <img src="{% static 'C:\New folder (2)\django\Notes\src\static\assets\img\default.jpg' %}" alt=""
+                  class="img-fluid">
                 {% endif %}
                 <h2 class="title">
                   <a href="{{note.get_absolute_url}}">{{note}}</a>
@@ -53,11 +58,16 @@
                   <ul>
                     <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a
                         href="{{note.get_absolute_url}}">{{note.user.username}}</a></li>
-                    <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a
-                        href="{{note.get_absolute_url}}"><time datetime="2022-01-01">{{note.craeted}}</time></a></li>
+                    <li class="d-flex align-items-center"><i class="bi bi-tags"></i> <a
+                        href="{{note.get_absolute_url}}">{{note.tags}}</a></li>
                   </ul>
                 </div>
-
+                <div class="meta-top">
+                  <ul>
+                    <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a
+                        href="{{note.get_absolute_url}}"><time datetime="2020-01-01">{{note.craeted}}</time></a></li>
+                  </ul>
+                </div>
                 <div class="content">
                   <p>
                     {{note.content|truncatewords:'20'}}
@@ -66,6 +76,9 @@
 
                 <div class="read-more mt-auto align-self-end">
                   <a href="{{note.get_absolute_url}}">Read More</a>
+                </div>
+                <div class="read-more mt-auto align-self-first">
+                  <a href="{% url 'notes:delete_note' note.slug %}">Delete Note</a>
                 </div>
 
               </article>

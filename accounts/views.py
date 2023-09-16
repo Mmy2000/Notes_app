@@ -11,9 +11,11 @@ from django.views.generic import TemplateView
 
 
 def home(request):
-    recent_notes = Note.objects.filter().order_by('-craeted')[:3]
+    user = request.user
+    recent_notes = Note.objects.filter(user=user).order_by('-craeted')[:3]
 
     return render(request, 'home.html',{
+        'user' : user ,
         'recent_notes' : recent_notes,
     })
 

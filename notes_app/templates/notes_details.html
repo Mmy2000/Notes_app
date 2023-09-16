@@ -44,8 +44,8 @@
               <img src="{{note.img.url}}" alt="" class="img-fluid">
             </div>
             {% else %}
-            <h2>Pls Go To Your Profile To Upload Your Image</h2>
-            {% endif %}
+            <img src="{% static 'C:\New folder (2)\django\Notes\src\static\assets\img\default.jpg' %}" alt=""
+              class="img-fluid"> {% endif %}
 
             <h2 class="title">{{note.title}}</h2>
 
@@ -74,30 +74,18 @@
 
               </ul>
             </div>
-            <div class="container>">
-              <div class="button_styles">
-                <a href="{% url 'notes:note_edit' note.slug%}">
-                  {% bootstrap_button button_type="submit" content="Edit Note" %}</a>
-              </div>
-            </div><!-- End meta bottom -->
+            <div class="button_styles">
+              <a href="{% url 'notes:note_edit' note.slug%}">
+                {% bootstrap_button button_type="submit" content="Edit Note" %}</a>
+            </div>
+            <div class="button_styles">
+              <a href="{% url 'notes:delete_note' note.slug%}">
+                {% bootstrap_button button_type="submit" content="Delete Note" %}</a>
+            </div>
 
           </article><!-- End blog post -->
 
-          <div class="post-author d-flex align-items-center">
-            <img src="assets/img/blog/blog-author.jpg" class="rounded-circle flex-shrink-0" alt="">
-            <div>
-              <h4>Jane Smith</h4>
-              <div class="social-links">
-                <a href="https://twitters.com/#"><i class="bi bi-twitter"></i></a>
-                <a href="https://facebook.com/#"><i class="bi bi-facebook"></i></a>
-                <a href="https://instagram.com/#"><i class="biu bi-instagram"></i></a>
-              </div>
-              <p>
-                Itaque quidem optio quia voluptatibus dolorem dolor. Modi eum sed possimus accusantium. Quas repellat
-                voluptatem officia numquam sint aspernatur voluptas. Esse et accusantium ut unde voluptas.
-              </p>
-            </div>
-          </div><!-- End post author -->
+
         </div>
 
         <div class="col-lg-4">
@@ -137,8 +125,8 @@
                       <img src="{{post.img.url}}" alt="" class="img-fluid">
                     </div>
                     {% else %}
-                    <h2>Pls Go To Your Profile To Upload Your Image</h2>
-                    {% endif %}
+                    <img src="{% static 'C:\New folder (2)\django\Notes\src\static\assets\img\default.jpg' %}" alt=""
+                      class="img-fluid"> {% endif %}
                     <img src="{{post.image.url}}" alt="" class="flex-shrink-0">
                     <div>
                       <h4><a href="{{post.get_absolute_url}}">{{post}}</a></h4>
@@ -151,23 +139,6 @@
                 </div>
 
               </div><!-- End sidebar recent posts-->
-
-              <div class="sidebar-item tags">
-                <h3 class="sidebar-title">Tags</h3>
-                <ul class="mt-3">
-                  <li><a href="#">{{note.tag}}</a></li>
-                  <li><a href="#">IT</a></li>
-                  <li><a href="#">Business</a></li>
-                  <li><a href="#">Mac</a></li>
-                  <li><a href="#">Design</a></li>
-                  <li><a href="#">Office</a></li>
-                  <li><a href="#">Creative</a></li>
-                  <li><a href="#">Studio</a></li>
-                  <li><a href="#">Smart</a></li>
-                  <li><a href="#">Tips</a></li>
-                  <li><a href="#">Marketing</a></li>
-                </ul>
-              </div><!-- End sidebar tags-->
 
             </div><!-- End Blog Sidebar -->
 
