@@ -15,7 +15,7 @@
         <div class="containers">
             <div class="col-md-6 mx-auto mt-5">
                 {% csrf_token %}
-                <p>Are you sure that you want to delete the post "{{note.title}}"?</p>
+                <p>Are you sure that you want to delete the post ?</p>
                 <div>
                     {% bootstrap_button button_type="submit" content="Yes , Delete" %}
                     <a href="{% url 'notes:post_list' %}">Cancel</a>

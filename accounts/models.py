@@ -1,4 +1,5 @@
 import datetime
+from django.utils import timezone
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
@@ -48,3 +49,16 @@ class Info(models.Model):
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
+
+
+class NewsLitter(models.Model):
+    email = models.EmailField( max_length=254)
+    created_at = models.DateTimeField(default=timezone.now())
+    
+
+    class Meta:
+        verbose_name = ("NewsLitter")
+        verbose_name_plural = ("NewsLitter")
+
+    def __str__(self):
+        return self.email

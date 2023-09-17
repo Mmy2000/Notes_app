@@ -10,7 +10,6 @@ class Note(models.Model):
     slug = models.SlugField(null=True , blank=True)
     content = models.TextField(max_length=2000 , blank=True)
     craeted = models.DateTimeField( default=datetime.datetime.now , blank=True)
-    category = models.ForeignKey('Category',related_name='post_category',verbose_name=('category'),on_delete=models.CASCADE , blank=True, null=True,default=None)
     active = models.BooleanField(default=True)
     tags = models.CharField(blank=True, max_length=50)
     img = models.ImageField(upload_to="notes-img")
@@ -26,9 +25,3 @@ class Note(models.Model):
     def __str__(self):
         return self.title
     
-
-class Category(models.Model):
-    name = models.CharField(max_length=60)
-
-    def __str__(self):
-        return self.name

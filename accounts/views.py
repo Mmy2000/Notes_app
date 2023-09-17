@@ -1,11 +1,11 @@
 from django.shortcuts import render , redirect , get_object_or_404
 from .forms import SignupForm , UserForm , ProfileForm
-from .models import Profile
+from .models import Profile ,NewsLitter
 from notes_app.models import Note
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate , login 
 from django.contrib import messages
-from django.views.generic import TemplateView
+from django.http import JsonResponse
 
 
 
@@ -70,3 +70,9 @@ def edit_profile(requset):
         'user_form':user_form,
         'profile_form':profile_form
     })
+
+
+def news_letters_subscribe(request):
+    email = request.POST.get('emailinput')
+    NewsLitter.objects.create(email=email)
+    return JsonResponse({'done':'done'})

@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404, render , redirect
 from django.contrib.auth.models import User
 from django.http import HttpResponse
-from .models import Note , Category
+from .models import Note 
 from .forms import NoteForm
 from django.views.generic import ListView ,DetailView
 from django.db.models.query_utils import Q
@@ -13,23 +13,14 @@ from django.contrib import messages
 
 
 
-class PostList(ListView):
-    model = Note
-    paginate_by = 4
-    template_name = 'notes.html'
+def notelist(request):
+    user = request.user
+    my_notes = Note.objects.filter(user=user).order_by('-craeted')
 
-    def get_queryset(self) :
-        user = self.request.user
-        name = self.request.GET.get('q','')
-        object_list = Note.objects.filter(
-            user = user
-        )
-
-        return object_list
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["categories"] = Category.objects.all().annotate(post_count=Count('post_category'))
-        return context
+    return render(request, 'notes.html',{
+        'user' : user ,
+        'my_notes' : my_notes,
+    })
 
 class PostDetail(DetailView):
     model = Note
@@ -38,9 +29,9 @@ class PostDetail(DetailView):
 
 
     def get_context_data(self, **kwargs):
+        user = self.request.user
         context = super().get_context_data(**kwargs)
-        context["categories"] = Category.objects.all().annotate(post_count=Count('post_category'))
-        context["recent_posts"] = Note.objects.all().order_by('-craeted')[:3]
+        context["recent_posts"] = Note.objects.filter(user=user).order_by('-craeted')[:3]
         return context
 
 
@@ -100,16 +91,4 @@ def delete_note(request , slug):
         messages.success(request,  'The post has been deleted successfully.')
         return redirect('/notes')
 
-
-
-class PostByCategory(ListView):
-    model = Note
-    template_name = 'notes.html'    
-
-    def get_queryset(self) :
-        slug = self.kwargs['slug']
-        object_list = Note.objects.filter(
-            Q(category__name__icontains = slug)
-        )
-        return object_list
     

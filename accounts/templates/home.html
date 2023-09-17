@@ -63,12 +63,10 @@
       </div>
 
     </div>
-    {% if request.user.is_authenticated %}
     <div class="button_styles">
       <a href="{% url 'notes_app:post_list' %}"> {% bootstrap_button button_type="submit" content="See More" %}</a>
     </div>
-    {% else %}
-    {% endif %}
+
 
   </section><!-- End Recent Blog Posts Section -->
 
