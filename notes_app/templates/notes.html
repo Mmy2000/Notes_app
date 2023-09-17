@@ -74,10 +74,11 @@
                   </p>
                 </div>
 
-                <div class="read-more mt-auto align-self-end">
+                <div class="read-more mt-auto align-self-end" style="padding-right: 118px;">
                   <a href="{{note.get_absolute_url}}">Read More</a>
                 </div>
-                <div class="read-more mt-auto align-self-first">
+                <div class="read-more mt-auto align-self-first" style="padding-left: 100px;
+                padding-top:5px;">
                   <a href="{% url 'notes:delete_note' note.slug %}">Delete Note</a>
                 </div>
 

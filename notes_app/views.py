@@ -19,11 +19,12 @@ class PostList(ListView):
     template_name = 'notes.html'
 
     def get_queryset(self) :
-        user = self.request.user
         name = self.request.GET.get('q','')
         object_list = Note.objects.filter(
-            user = user 
+            Q(title__icontains = name) |
+            Q(content__icontains = name) 
         )
+
         return object_list
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
