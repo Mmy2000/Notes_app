@@ -7,6 +7,8 @@ from django.views.generic import ListView ,DetailView
 from django.db.models.query_utils import Q
 from django.db.models import Count
 from django.contrib import messages
+from django.core.paginator import Paginator
+
 
 
 
@@ -16,10 +18,13 @@ from django.contrib import messages
 def notelist(request):
     user = request.user
     my_notes = Note.objects.filter(user=user).order_by('-craeted')
+    paginator = Paginator(my_notes, 9)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
 
     return render(request, 'notes.html',{
         'user' : user ,
-        'my_notes' : my_notes,
+        'page_obj' : page_obj
     })
 
 class PostDetail(DetailView):

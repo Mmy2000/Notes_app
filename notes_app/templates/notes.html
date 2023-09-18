@@ -11,6 +11,50 @@
   .button_styles2 {
     padding-bottom: 5px;
   }
+
+  .A1 {
+    text-decoration: none;
+    color: white;
+    background: #3545dc;
+    padding: 1px 4px;
+    border-radius: 4px;
+    font-size: 19px;
+    margin-right: 10px;
+    margin-bottom: 15px;
+  }
+  .A2 {
+    text-decoration: none;
+    color: white;
+    background: #3545dc;
+    padding: 1px 4px;
+    border-radius: 4px;
+    font-size: 19px;
+    margin-left: 10px;
+    margin-bottom: 5px;
+  }
+
+  .A1:hover {
+    background:  rgp(0, 51, 102);
+    color:white;
+  }
+  .A2:hover {
+    background:  rgp(0, 51, 102);
+    color:white;
+  }
+
+  .A1:focus {
+    outline: 3px solid rgb(220 53 69 / 50%);
+
+  }
+  .A2:focus {
+    outline: 3px solid rgb(220 53 69 / 50%);
+
+  }
+
+  .justify-content-center {
+    display: flex;
+    justify-content: space-between;
+  }
 </style>
 
 <main id="main">
@@ -39,7 +83,7 @@
         <div class="col-lg-12">
 
           <div class="row gy-4 posts-list">
-            {% for note in my_notes %}
+            {% for note in page_obj %}
             <div class="col-lg-4">
               <article class="d-flex flex-column">
                 {% if note.img %}
@@ -90,28 +134,22 @@
                 {% bootstrap_button button_type="submit" content="Add Note" %}</a>
             </div>
 
-          </div><!-- End blog posts list -->
+          </div>
+
+          <!-- End blog posts list -->
 
           <div class="blog-pagination">
             <ul class="justify-content-center">
               {% if page_obj.has_previous %}
-              <li><a href="?page={{page_obj.previous_page_number}}">&lt;</a></li>
-              {% else %}
-              <li class="disabled"><span>&lt;</span></a></li>
-              {% endif %}
-              {% for i in paginator.page_range  %}
-              {% if page_obj.number == i%}
-              <li class="active">{{i}}</li>
-              {% else %}
-              <li class="active"><a href="?page={{i}}">{{i}}</a></li>
+              <a class ="A1" href="?page={{ page_obj.previous_page_number }}">&laquo;previous</a>
               {% endif %}
 
-              {% endfor %}
+              <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+              </span>
 
               {% if page_obj.has_next %}
-              <li><a href="?page={{page_obj.next_page_number}}"><span>&gt;</span></a></li>
-              {% else %}
-              <li class="disabled"><span>&gt;</span></a></li>
+              <a class ="A2" href="?page={{ page_obj.next_page_number }}">next&raquo;</a>
               {% endif %} </ul>
           </div><!-- End blog pagination -->
 
