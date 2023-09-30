@@ -11,13 +11,17 @@ from django.http import JsonResponse
 
 
 def home(request):
-    user = request.user
-    recent_notes = Note.objects.filter(user=user).order_by('-craeted')[:3]
+    try:
+        user = request.user
+        recent_notes = Note.objects.filter(user=user).order_by('-craeted')[:3]
 
-    return render(request, 'home.html',{
-        'user' : user ,
-        'recent_notes' : recent_notes,
-    })
+        return render(request, 'home.html',{
+            'user' : user ,
+            'recent_notes' : recent_notes,
+        })
+    except:
+        return render(request, 'home.html',{})
+            
 
 
 def signup(request):
