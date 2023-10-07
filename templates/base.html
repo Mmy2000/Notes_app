@@ -83,8 +83,9 @@
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle d-none"></i>
             </nav><!-- .navbar -->
-
+            {% if request.user.is_authenticated %}
             <a class="btn-getstarted scrollto" href="{% url 'notes_app:add_note' %}">Get Started</a>
+            {% endif %}
 
         </div>
     </header><!-- End Header -->

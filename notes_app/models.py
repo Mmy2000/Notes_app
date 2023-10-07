@@ -1,4 +1,4 @@
-import datetime
+from django.utils import timezone
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
@@ -9,7 +9,7 @@ class Note(models.Model):
     title = models.CharField( max_length=50)
     slug = models.SlugField(null=True , blank=True)
     content = models.TextField(max_length=2000 , blank=True)
-    craeted = models.DateTimeField( default=datetime.datetime.now , blank=True)
+    craeted = models.DateTimeField( default=timezone.now ,null=True, blank=True)
     active = models.BooleanField(default=True)
     tags = models.CharField(blank=True, max_length=50)
     img = models.ImageField(upload_to="notes-img")

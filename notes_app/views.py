@@ -31,13 +31,14 @@ class PostDetail(DetailView):
     model = Note
     template_name = 'notes_details.html'
 
-
-
     def get_context_data(self, **kwargs):
         user = self.request.user
         context = super().get_context_data(**kwargs)
-        context["recent_posts"] = Note.objects.filter(user=user).order_by('-craeted')[:3]
+        context["recent_posts"] = Note.objects.get(user=user).order_by('-craeted')[:3]
         return context
+
+
+
 
 
 def note_add(request):

@@ -16,7 +16,10 @@
     <h2>Welcome to <span>Quick Notes App</span></h2>
     <p>Create Awesome Note .. Everywhere.</p>
     <div class="d-flex">
+      {% if request.user.is_authenticated %}
       <a href="{% url 'notes_app:add_note' %}" class="btn-get-started scrollto">Get Started</a>
+      {% endif %}
+
     </div>
   </div>
 </section>
@@ -63,9 +66,11 @@
       </div>
 
     </div>
+    {% if request.user.is_authenticated %}
     <div class="button_styles">
       <a href="{% url 'notes_app:post_list' %}"> {% bootstrap_button button_type="submit" content="See More" %}</a>
     </div>
+    {% endif %}
 
 
   </section><!-- End Recent Blog Posts Section -->
