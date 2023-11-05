@@ -42,7 +42,6 @@ class PostDetail(DetailView):
 
 
 def note_add(request):
-    try :
         if request.method == "POST" :
             form = NoteForm(request.POST)
 
@@ -60,8 +59,6 @@ def note_add(request):
         }
         
         return render(request, 'add.html' , context)
-    except :
-        return redirect('/accounts/login')
 
 
 def edit(request , slug):
