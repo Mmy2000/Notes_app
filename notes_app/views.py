@@ -43,7 +43,7 @@ class PostDetail(DetailView):
 
 def note_add(request):
         if request.method == "POST" :
-            form = NoteForm(request.POST)
+            form = NoteForm(request.POST,request.FILES)
 
             if form.is_valid():
                 new_form = form.save(commit=False)

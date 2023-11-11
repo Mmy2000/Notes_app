@@ -7,7 +7,7 @@
 <div class="container">
     <div class="add_form">
 
-        <form method="POST">
+        <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             {%bootstrap_form form %}
             {% bootstrap_button button_type="submit" content="Add Note" %}
