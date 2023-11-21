@@ -15,13 +15,15 @@ class Note(models.Model):
     tags = TaggableManager()
     img = models.ImageField(upload_to="notes-img")
 
-    def get_absolute_url(self):
-        return reverse("notes_app:post_detail", kwargs={"slug": self.slug})
-
     def save(self , *args , **kwargs):
         if not self.slug:
             self.slug = slugify(self.title)
         super(Note,self).save( *args , **kwargs)
+
+    def get_absolute_url(self):
+        return reverse("notes_app:post_detail", kwargs={"id":self.id,"slug": self.slug})
+
+    
 
     def __str__(self):
         return self.title

@@ -76,11 +76,11 @@
               </ul>
             </div>
             <div class="button_styles">
-              <a href="{% url 'notes:note_edit' note.slug%}">
+              <a href="{% url 'notes:note_edit' note.id note.slug%}">
                 {% bootstrap_button button_type="submit" content="Edit Note" %}</a>
             </div>
             <div class="button_styles">
-              <a href="{% url 'notes:delete_note' note.slug%}">
+              <a href="{% url 'notes:delete_note' note.id note.slug%}">
                 {% bootstrap_button button_type="submit" content="Delete Note" %}</a>
             </div>
 

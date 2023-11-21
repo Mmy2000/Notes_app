@@ -69,8 +69,8 @@ def note_add(request):
         return render(request, 'add.html' , context)
 
 
-def edit(request , slug):
-    note = get_object_or_404(Note , slug=slug)
+def edit(request ,id, slug):
+    note = get_object_or_404(Note , id=id,slug=slug)
     if request.method == "POST" :
         form = NoteForm(request.POST , instance=note)
 
@@ -92,8 +92,8 @@ def edit(request , slug):
 
     return render(request, 'create.html' , context)
 
-def delete_note(request , slug):
-    note = get_object_or_404(Note , slug=slug)
+def delete_note(request , id,slug):
+    note = get_object_or_404(Note , id=id,slug=slug)
     context = {'post': note}    
     
     if request.method == 'GET':

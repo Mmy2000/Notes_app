@@ -11,7 +11,6 @@ from django.http import JsonResponse
 
 
 def home(request):
-    try:
         user = request.user
         recent_notes = Note.objects.filter(user=user).order_by('-craeted')[:3]
 
@@ -19,8 +18,6 @@ def home(request):
             'user' : user ,
             'recent_notes' : recent_notes,
         })
-    except:
-        return render(request, 'home.html',{})
             
 
 

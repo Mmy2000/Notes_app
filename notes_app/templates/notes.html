@@ -125,7 +125,7 @@
                 </div>
                 <div class="read-more mt-auto align-self-first" style="padding-left: 100px;
                 padding-top:5px;">
-                  <a href="{% url 'notes:delete_note' note.slug %}">Delete Note</a>
+                  <a href="{% url 'notes:delete_note' note.id note.slug %}">Delete Note</a>
                 </div>
 
               </article>
