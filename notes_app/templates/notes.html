@@ -102,8 +102,10 @@
                   <ul>
                     <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a
                         href="{{note.get_absolute_url}}">{{note.user.username}}</a></li>
+                        {% for tag in note.tags.all %}
                     <li class="d-flex align-items-center"><i class="bi bi-tags"></i> <a
-                        href="{{note.get_absolute_url}}">{{note.tags}}</a></li>
+                        href="#">{{tag}}</a></li>
+                        {% endfor %}
                   </ul>
                 </div>
                 <div class="meta-top">

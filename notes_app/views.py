@@ -8,9 +8,7 @@ from django.db.models.query_utils import Q
 from django.db.models import Count
 from django.contrib import messages
 from django.core.paginator import Paginator
-
-
-
+from taggit.models import Tag
 
 
 
@@ -34,7 +32,8 @@ class PostDetail(DetailView):
     def get_context_data(self, **kwargs):
         user = self.request.user
         context = super().get_context_data(**kwargs)
-        context["recent_posts"] = Note.objects.get(user=user).order_by('-craeted')[:3]
+        context["recent_posts"] = Note.objects.filter(user=user).order_by('-craeted')[:3]
+        context["tags"] = Tag.objects.all()
         return context
 
 
@@ -49,6 +48,7 @@ def note_add(request):
                 new_form = form.save(commit=False)
                 new_form.user = request.user
                 new_form.save()
+                form.save_m2m()
                 messages.success(request, "Note Is Added Succssefully.")
                 return redirect('/notes')
 
@@ -70,6 +70,7 @@ def edit(request , slug):
             new_form = form.save(commit=False)
             new_form.user = request.user
             new_form.save()
+            form.save_m2m()
             messages.success(request, "Note Is Updated Succssefully.")
             return redirect('/notes')
 

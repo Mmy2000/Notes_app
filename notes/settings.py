@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'notes_app',
     "django_bootstrap5",
+    'taggit',
 ]
 
 MIDDLEWARE = [

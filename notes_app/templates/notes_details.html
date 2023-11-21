@@ -70,8 +70,9 @@
 
               <i class="bi bi-tags"></i>
               <ul class="tags">
-                <li><a href="{{note.get_absolute_url}}">{{note.tags}}</a></li>
-
+                {% for tag in note.tags.all %}
+                <li><a href="#">{{tag}}</a></li>
+                {% endfor %}
               </ul>
             </div>
             <div class="button_styles">
