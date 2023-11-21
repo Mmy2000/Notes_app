@@ -6,10 +6,11 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate , login 
 from django.contrib import messages
 from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required
 
 
 
-
+@login_required(login_url='login')
 def home(request):
         user = request.user
         recent_notes = Note.objects.filter(user=user).order_by('-craeted')[:3]

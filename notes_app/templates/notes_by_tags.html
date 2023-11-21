@@ -104,7 +104,7 @@
                         href="{{note.get_absolute_url}}">{{note.user.username}}</a></li>
                         {% for tag in note.tags.all %}
                     <li class="d-flex align-items-center"><i class="bi bi-tags"></i> <a
-                        href="#">{{tag}}</a></li>
+                        href="{% url 'notes_app:post_by_tags' tag%}">{{tag}}</a></li>
                         {% endfor %}
                   </ul>
                 </div>
@@ -125,7 +125,7 @@
                 </div>
                 <div class="read-more mt-auto align-self-first" style="padding-left: 100px;
                 padding-top:5px;">
-                  <a href="{% url 'notes:delete_note' note.id note.slug %}">Delete Note</a>
+                  <a href="{% url 'notes:delete_note' note.id  %}">Delete Note</a>
                 </div>
 
               </article>

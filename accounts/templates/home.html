@@ -29,7 +29,7 @@
   <section id="recent-blog-posts" class="recent-blog-posts">
 
     <div class="container" data-aos="fade-up">
-
+{% if user.is_authenticated %}
       <div class="section-header">
         <h2>Notes</h2>
         <h3>Your Recent notes</h3>
@@ -71,7 +71,8 @@
       <a href="{% url 'notes_app:post_list' %}"> {% bootstrap_button button_type="submit" content="See More" %}</a>
     </div>
     {% endif %}
-
+  
+{% endif %}
 
   </section><!-- End Recent Blog Posts Section -->
 

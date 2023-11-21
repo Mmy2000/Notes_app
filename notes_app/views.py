@@ -37,18 +37,19 @@ def post_details(request,id):
     }
     return render(request,'notes_details.html',context)
 
-
 class PostByTags(ListView):
     model = Note
     template_name = 'notes_by_tags.html'
     paginate_by=3
 
+
     def get_queryset(self) :
         slug = self.kwargs['slug']
         object_list = Note.objects.filter(
-            Q(tags__name__icontains = slug)
+            Q(tags__name__icontains = slug),
         )
-        return object_list
+        return object_list.filter(user=self.request.user)
+
     
 def note_add(request):
         if request.method == "POST" :
