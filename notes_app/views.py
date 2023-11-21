@@ -25,16 +25,18 @@ def notelist(request):
         'page_obj' : page_obj
     })
 
-class PostDetail(DetailView):
-    model = Note
-    template_name = 'notes_details.html'
+def post_details(request,id):
+    user = request.user
+    note=Note.objects.get(id=id,user=user)
+    recent_posts = Note.objects.filter(user=user).order_by('-craeted')[:3]
+    tags = Tag.objects.all()
+    context = {
+        'note':note,
+        'recent_posts':recent_posts,
+        'tags':tags
+    }
+    return render(request,'notes_details.html',context)
 
-    def get_context_data(self, **kwargs):
-        user = self.request.user
-        context = super().get_context_data(**kwargs)
-        context["recent_posts"] = Note.objects.filter(user=user).order_by('-craeted')[:3]
-        context["tags"] = Tag.objects.all()
-        return context
 
 class PostByTags(ListView):
     model = Note
@@ -69,8 +71,8 @@ def note_add(request):
         return render(request, 'add.html' , context)
 
 
-def edit(request ,id, slug):
-    note = get_object_or_404(Note , id=id,slug=slug)
+def edit(request ,id):
+    note = get_object_or_404(Note , id=id)
     if request.method == "POST" :
         form = NoteForm(request.POST , instance=note)
 
@@ -92,8 +94,8 @@ def edit(request ,id, slug):
 
     return render(request, 'create.html' , context)
 
-def delete_note(request , id,slug):
-    note = get_object_or_404(Note , id=id,slug=slug)
+def delete_note(request , id):
+    note = get_object_or_404(Note , id=id)
     context = {'post': note}    
     
     if request.method == 'GET':
