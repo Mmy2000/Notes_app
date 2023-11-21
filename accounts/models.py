@@ -60,7 +60,7 @@ def create_user_profile(sender, instance, created, **kwargs):
 
 class NewsLitter(models.Model):
     email = models.EmailField( max_length=254)
-    created_at = models.DateTimeField(default=timezone.now())
+    created_at = models.DateTimeField(default=timezone.now)
     
 
     class Meta:
