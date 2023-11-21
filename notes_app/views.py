@@ -28,7 +28,7 @@ def notelist(request):
 def post_details(request,id):
     user = request.user
     note=Note.objects.get(id=id,user=user)
-    recent_posts = Note.objects.filter(user=user).order_by('-craeted')[:3]
+    recent_posts = Note.objects.filter(user=user).order_by('-craeted')[:9]
     tags = Tag.objects.all()
     context = {
         'note':note,
