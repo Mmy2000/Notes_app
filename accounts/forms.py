@@ -19,7 +19,7 @@ class UserForm(forms.ModelForm):
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['phone_number','address','image','bio','phone_number','fb_link' ,'twitter_link' , 'instagram_link' , 'linked_in_link']
+        fields = ['phone_number','address','image','bio','phone_number','headline','fb_link' ,'twitter_link' , 'instagram_link' , 'linked_in_link']
         def __init__(self, *args, **kwargs):
             super(ProfileForm, self).__init__(*args, **kwargs)
             self.fields['image'].required = True

@@ -200,7 +200,10 @@
             <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
               <img src="{% if profile.image %}{{profile.image.url}}{% else %}{% static 'C:\New folder (2)\django\Notes\src\static\assets\img 2\avatar.png' %}{% endif %}" alt="Profile" class="rounded-circle">
               <h2>{{profile.user.username}}</h2>
+              {% if profile.headline %}
               <h3>{{profile.headline}}</h3>
+              {% else %}
+              {% endif %}
               <div class="social-links mt-2">
                 <a href="{{profile.twitter_link}}" class="twitter"><i class="bi bi-twitter"></i></a>
                 <a href="{{profile.fb_link}}" class="facebook"><i class="bi bi-facebook"></i></a>
@@ -235,41 +238,56 @@
               <div class="tab-content pt-2">
 
                 <div class="tab-pane fade show active profile-overview" id="profile-overview">
+                  {% if profile.bio %}
                   <h5 class="card-title">BIO</h5>
                   <p class="small fst-italic">{{profile.bio}}</p>
-
+                  {% else %}
+                  {% endif %}
                   <h5 class="card-title">Profile Details</h5>
 
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label ">Full Name</div>
-                    <div class="col-lg-9 col-md-8">{{profile.user.username}}</div>
+                    <div class="col-lg-9 col-md-8">{{profile.full_name}}</div>
                   </div>
-
+                  {% if profile.headline %}
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Job</div>
                     <div class="col-lg-9 col-md-8">{{profile.headline}}</div>
                   </div>
+                  {% else %}
+                  {% endif %}
 
+                  {% if profile.join_date %}
                   <div class="row">
-                    <div class="col-lg-3 col-md-4 label">join_date</div>
+                    <div class="col-lg-3 col-md-4 label">join date</div>
                     <div class="col-lg-9 col-md-8">{{profile.join_date}}</div>
                   </div>
+                  {% else %}
+                  {% endif %}
 
+                  {% if profile.address %}
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Address</div>
                     <div class="col-lg-9 col-md-8">{{profile.address}}</div>
                   </div>
+                  {% else %}
+                  {% endif %}
 
+                  {% if profile.phone_number %}
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Phone</div>
                     <div class="col-lg-9 col-md-8">{{profile.phone_number}}</div>
                   </div>
+                  {% else %}
+                  {% endif %}
 
+                  {% if profile.user.email %}
                   <div class="row">
                     <div class="col-lg-3 col-md-4 label">Email</div>
                     <div class="col-lg-9 col-md-8">{{profile.user.email}}</div>
                   </div>
-
+                  {% else %}
+                  {% endif %}
                 </div>
 
 

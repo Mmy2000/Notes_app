@@ -23,6 +23,8 @@ class Profile(models.Model):
     instagram_link = models.URLField( max_length=200, blank=True, null=True)
     linked_in_link = models.URLField( max_length=200, blank=True, null=True)
 
+    def full_name(self):
+        return f'{self.user.first_name} {self.user.last_name}'
 
 
     def __str__(self):
