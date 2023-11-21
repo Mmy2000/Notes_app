@@ -36,10 +36,18 @@ class PostDetail(DetailView):
         context["tags"] = Tag.objects.all()
         return context
 
+class PostByTags(ListView):
+    model = Note
+    template_name = 'notes_by_tags.html'
+    paginate_by=3
 
-
-
-
+    def get_queryset(self) :
+        slug = self.kwargs['slug']
+        object_list = Note.objects.filter(
+            Q(tags__name__icontains = slug)
+        )
+        return object_list
+    
 def note_add(request):
         if request.method == "POST" :
             form = NoteForm(request.POST,request.FILES)

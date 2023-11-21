@@ -1,0 +1,169 @@
+{% extends "base.html" %}
+{% load static %}
+{% load django_bootstrap5 %}
+{% block body %}
+<style>
+  .button_styles {
+    text-align: center;
+    padding-top: 10px;
+  }
+
+  .button_styles2 {
+    padding-bottom: 5px;
+  }
+
+  .A1 {
+    text-decoration: none;
+    color: white;
+    background: #3545dc;
+    padding: 1px 4px;
+    border-radius: 4px;
+    font-size: 19px;
+    margin-right: 10px;
+    margin-bottom: 15px;
+  }
+  .A2 {
+    text-decoration: none;
+    color: white;
+    background: #3545dc;
+    padding: 1px 4px;
+    border-radius: 4px;
+    font-size: 19px;
+    margin-left: 10px;
+    margin-bottom: 5px;
+  }
+
+  .A1:hover {
+    background:  rgp(0, 51, 102);
+    color:white;
+  }
+  .A2:hover {
+    background:  rgp(0, 51, 102);
+    color:white;
+  }
+
+  .A1:focus {
+    outline: 3px solid rgb(220 53 69 / 50%);
+
+  }
+  .A2:focus {
+    outline: 3px solid rgb(220 53 69 / 50%);
+
+  }
+
+  .justify-content-center {
+    display: flex;
+    justify-content: space-between;
+  }
+</style>
+
+<main id="main">
+
+  <!-- ======= Breadcrumbs ======= -->
+  <div class="breadcrumbs">
+    <div class="container">
+
+      <div class="d-flex justify-content-between align-items-center">
+        <h2>My Notes</h2>
+        <ol>
+          <li><a href="/">Home</a></li>
+          <li> My Notes</li>
+        </ol>
+      </div>
+
+    </div>
+  </div><!-- End Breadcrumbs -->
+
+  <!-- ======= Blog Section ======= -->
+  <section id="blog" class="blog">
+    <div class="container" data-aos="fade-up">
+
+      <div class="row g-5">
+
+        <div class="col-lg-12">
+
+          <div class="row gy-4 posts-list">
+            {% for note in object_list %}
+            <div class="col-lg-4">
+              <article class="d-flex flex-column">
+                {% if note.img %}
+                <div class="post-img">
+                  <img src="{{note.img.url}}" alt="" class="img-fluid">
+                </div>
+                {% else %}
+                <img src="{% static 'C:\New folder (2)\django\Notes\src\static\assets\img\default.jpg' %}" alt=""
+                  class="img-fluid">
+                {% endif %}
+                <h2 class="title">
+                  <a href="{{note.get_absolute_url}}">{{note}}</a>
+                </h2>
+
+                <div class="meta-top">
+                  <ul>
+                    <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a
+                        href="{{note.get_absolute_url}}">{{note.user.username}}</a></li>
+                        {% for tag in note.tags.all %}
+                    <li class="d-flex align-items-center"><i class="bi bi-tags"></i> <a
+                        href="#">{{tag}}</a></li>
+                        {% endfor %}
+                  </ul>
+                </div>
+                <div class="meta-top">
+                  <ul>
+                    <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <a
+                        href="{{note.get_absolute_url}}"><time datetime="2020-01-01">{{note.craeted}}</time></a></li>
+                  </ul>
+                </div>
+                <div class="content">
+                  <p>
+                    {{note.content|truncatewords:'20'}}
+                  </p>
+                </div>
+
+                <div class="read-more mt-auto align-self-end" style="padding-right: 122.5px;">
+                  <a href="{{note.get_absolute_url}}">Read More</a>
+                </div>
+                <div class="read-more mt-auto align-self-first" style="padding-left: 100px;
+                padding-top:5px;">
+                  <a href="{% url 'notes:delete_note' note.slug %}">Delete Note</a>
+                </div>
+
+              </article>
+            </div><!-- End post list item -->
+            {% endfor %}
+            <div class="button_styles">
+              <a href="{% url 'notes:add_note' %}">
+                {% bootstrap_button button_type="submit" content="Add Note" %}</a>
+            </div>
+
+          </div>
+
+          <!-- End blog posts list -->
+
+          <div class="blog-pagination">
+            <ul class="justify-content-center">
+              {% if page_obj.has_previous %}
+              <a class ="A1" href="?page={{ page_obj.previous_page_number }}">&laquo;previous</a>
+              {% endif %}
+
+              <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+              </span>
+
+              {% if page_obj.has_next %}
+              <a class ="A2" href="?page={{ page_obj.next_page_number }}">next&raquo;</a>
+              {% endif %} </ul>
+          </div><!-- End blog pagination -->
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+    </div>
+  </section><!-- End Blog Section -->
+
+</main><!-- End #main -->
+{% endblock body %}
