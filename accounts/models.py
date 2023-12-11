@@ -25,6 +25,8 @@ class Profile(models.Model):
 
     def full_name(self):
         return f'{self.user.first_name} {self.user.last_name}'
+    
+    
 
 
     def __str__(self):
