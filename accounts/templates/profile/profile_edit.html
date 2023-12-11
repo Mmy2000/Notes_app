@@ -1,7 +1,15 @@
 {% extends 'base.html' %}
 {% load django_bootstrap5 %}
 {% block body %}
-<div class="container">
+<br><br><br>
+<div class="container"><br>
+    <nav aria-label="breadcrumb" class="main-breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'accounts:edit_profile'%}">User Profile</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Edit Profile</li>
+      </ol>
+    </nav>
     <div class="add_form">
 
         <div class="col-md-6 mx-auto mt-5">
@@ -17,5 +25,5 @@
 
     </div>
 </div>
-
+<br><br><br>
 {% endblock body %}
