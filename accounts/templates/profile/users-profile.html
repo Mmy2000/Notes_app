@@ -31,7 +31,9 @@
                 <h4>{{profile.full_name}}</h4>
                 <p class="text-muted mb-1">{{profile.headline}}</p>
                 <p class="text-muted font-size-sm">{{profile.address}}</p>
-                <a href="{% url 'notes_app:post_list' %}" class="btn btn-primary">Your Notes</a>
+                <a href="{% url 'notes_app:post_list' %}" class="btn btn-primary">My Notes</a>
+                <a href="{% url 'notes_app:add_note' %}" class="btn btn-outline-primary">Add Notes<span
+                                        class="badge"></span></a>
               </div>
             </div>
           </div>
