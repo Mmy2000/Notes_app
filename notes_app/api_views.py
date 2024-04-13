@@ -8,7 +8,7 @@ class NotesListApi(generics.ListCreateAPIView):
     queryset = Note.objects.all()
     permission_classes = [IsAuthenticated,]
 
-class NotesDetails(generics.RetrieveUpdateDestroyAPIView):
+class NotesDetailsApi(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = NotesSerializer
     queryset = Note.objects.all()
     permission_classes = [IsAuthenticated,]
