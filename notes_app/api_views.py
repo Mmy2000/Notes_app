@@ -5,6 +5,8 @@ from .serializers import NotesSerializer
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from django.shortcuts import get_list_or_404, get_object_or_404
+from django.db.models.query_utils import Q
+
 
 # class NotesListApi(generics.ListCreateAPIView):
 #     serializer_class = NotesSerializer
@@ -25,4 +27,12 @@ def post_list(request):
 def post_deatils_api(request , id):
     post = get_object_or_404(Note , id=id)
     data = NotesSerializer(post).data
+    return Response({'data':data})
+
+@api_view(['GET'])
+def searchByTag(requset , query):
+    post = Note.objects.filter(
+        Q(tags__name__icontains = query)
+    )
+    data = NotesSerializer(post , many=True).data
     return Response({'data':data})
