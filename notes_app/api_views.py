@@ -8,31 +8,33 @@ from django.shortcuts import get_list_or_404, get_object_or_404
 from django.db.models.query_utils import Q
 
 
-# class NotesListApi(generics.ListCreateAPIView):
-#     serializer_class = NotesSerializer
-#     queryset = Note.objects.all()
+class NotesListApi(generics.ListCreateAPIView):
+    serializer_class = NotesSerializer
+    queryset = Note.objects.all()
     # permission_classes = [IsAuthenticated,]
 
-# class NotesDetailsApi(generics.RetrieveUpdateDestroyAPIView):
-#     serializer_class = NotesSerializer
-#     queryset = Note.objects.all()
+class NotesDetailsApi(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = NotesSerializer
+    queryset = Note.objects.all()
     # permission_classes = [IsAuthenticated,]
-@api_view(['GET'])
-def post_list(request):
-    all_post = Note.objects.all()
-    data = NotesSerializer(all_post , many=True).data
-    return Response({'data':data})
 
-@api_view(['GET'])
-def post_deatils_api(request , id):
-    post = get_object_or_404(Note , id=id)
-    data = NotesSerializer(post).data
-    return Response({'data':data})
 
-@api_view(['GET'])
-def searchByTag(requset , query):
-    post = Note.objects.filter(
-        Q(tags__name__icontains = query)
-    )
-    data = NotesSerializer(post , many=True).data
-    return Response({'data':data})
+# @api_view(['GET'])
+# def post_list(request):
+#     all_post = Note.objects.all()
+#     data = NotesSerializer(all_post , many=True).data
+#     return Response({'data':data})
+
+# @api_view(['GET'])
+# def post_deatils_api(request , id):
+#     post = get_object_or_404(Note , id=id)
+#     data = NotesSerializer(post).data
+#     return Response({'data':data})
+
+# @api_view(['GET'])
+# def searchByTag(requset , query):
+#     post = Note.objects.filter(
+#         Q(tags__name__icontains = query)
+#     )
+#     data = NotesSerializer(post , many=True).data
+#     return Response({'data':data})

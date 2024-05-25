@@ -13,10 +13,10 @@ urlpatterns = [
     path('<int:id>/edit' , views.edit,name='note_edit'),
     path('<int:id>/delete' , views.delete_note,name='delete_note'),
     ## api urls ##
-    # path('api/list' , api_views.NotesListApi.as_view(), name='notes_api_list'),
-    path('api/list' , api_views.post_list, name='notes_api_list'),
-    path('api/list/<int:id>' , api_views.post_deatils_api, name='notes_api_details'),
-    path('api/list/<str:query>' , api_views.searchByTag, name='searchByTag'),
-    # path('api/list/<int:pk>' , api_views.NotesDetailsApi.as_view(), name='notes_api_detail')
+    path('api/list' , api_views.NotesListApi.as_view(), name='notes_api_list'),
+    # path('api/list' , api_views.post_list, name='notes_api_list'),
+    # path('api/list/<int:id>' , api_views.post_deatils_api, name='notes_api_details'),
+    # path('api/list/<str:query>' , api_views.searchByTag, name='searchByTag'),
+    path('api/list/<int:pk>' , api_views.NotesDetailsApi.as_view(), name='notes_api_detail')
     
 ]
