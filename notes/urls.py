@@ -25,6 +25,8 @@ urlpatterns = [
     path('' , include('accounts.urls',namespace='home')),
     path('notes/' , include('notes_app.urls' ,namespace = 'notes') ),
     path('api-auth/', include('rest_framework.urls')),
+    path('rest-auth/', include('dj_rest_auth.urls')),
+    path('rest-auth/registration/', include('dj_rest_auth.registration.urls'))
 ]
 
 urlpatterns +=  static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

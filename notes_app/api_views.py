@@ -19,6 +19,9 @@ class NotesDetailsApi(generics.RetrieveUpdateDestroyAPIView):
     # permission_classes = [IsAuthenticated,]
 
 
+    
+
+
 # @api_view(['GET'])
 # def post_list(request):
 #     all_post = Note.objects.all()
