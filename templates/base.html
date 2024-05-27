@@ -71,10 +71,10 @@
             <nav id="navbar" class="navbar">
                 <ul>
 
-                    <li><a class="nav-link scrollto" href="/">Home</a></li>
+                    <li><a class="nav-link scrollto {% if request.path == '/' %}active {% else %}{% endif %} " href="/">Home</a></li>
                     {% if request.user.is_authenticated %}
-                    <li><a class="nav-link scrollto" href="{% url 'notes_app:post_list' %}">Notes</a></li>
-                    <li><a class="nav-link scrollto" href="{% url 'accounts:profile' %}">Profile</a></li>
+                    <li><a class="nav-link scrollto {% if request.path == '/notes/' %}active {% else %}{% endif %}" href="{% url 'notes_app:post_list' %}">Notes</a></li>
+                    <li><a class="nav-link scrollto {% if request.path == '/accounts/profile/' %}active {% else %}{% endif %}" href="{% url 'accounts:profile' %}">Profile</a></li>
                     <li><a class="nav-link scrollto" href="{% url 'logout' %}">Logout</a></li>
                     {% else %}
                     <li><a class="nav-link scrollto" href="{% url 'login' %}">Login</a></li>
