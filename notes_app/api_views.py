@@ -11,12 +11,12 @@ from django.db.models.query_utils import Q
 class NotesListApi(generics.ListCreateAPIView):
     serializer_class = NotesSerializer
     queryset = Note.objects.all()
-    # permission_classes = [IsAuthenticated,]
+    permission_classes = [IsAuthenticated,]
 
 class NotesDetailsApi(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = NotesSerializer
     queryset = Note.objects.all()
-    # permission_classes = [IsAuthenticated,]
+    permission_classes = [IsAuthenticated,]
 
 
     
